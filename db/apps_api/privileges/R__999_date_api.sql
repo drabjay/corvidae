@@ -1,0 +1,2 @@
+GRANT EXECUTE ON date_api TO apps_ui
+WITH GRANT OPTION;

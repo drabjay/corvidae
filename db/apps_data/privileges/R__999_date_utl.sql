@@ -1,0 +1,2 @@
+GRANT EXECUTE ON date_utl TO apps_api
+WITH GRANT OPTION;
