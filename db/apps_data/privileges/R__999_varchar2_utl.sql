@@ -1,0 +1,2 @@
+GRANT EXECUTE ON varchar2_utl TO apps_api
+WITH GRANT OPTION;
