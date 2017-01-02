@@ -1,0 +1,2 @@
+GRANT EXECUTE ON varchar2_api TO apps_ui
+WITH GRANT OPTION;

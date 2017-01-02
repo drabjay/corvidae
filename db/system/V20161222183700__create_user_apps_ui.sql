@@ -6,6 +6,7 @@ BEGIN
     'CREATE USER apps_ui' ||
    ' IDENTIFIED BY ' || l_password ||
    ' DEFAULT TABLESPACE apps' ||
+   ' QUOTA UNLIMITED ON apps' ||
    ' TEMPORARY TABLESPACE temp' ||
    ' PROFILE default' ||
    ' ACCOUNT UNLOCK';

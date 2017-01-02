@@ -1,2 +1,6 @@
+flyway.apps.conf
+flyway.apps_api.conf
+flyway.apps_data.conf
+flyway.apps_ui.conf
 flyway.system.conf
 spec/database.yml
