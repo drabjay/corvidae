@@ -22,5 +22,12 @@ FUNCTION nvl
 RETURN NUMBER
 DETERMINISTIC;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_boolean
+  (p_number                       IN     NUMBER)
+RETURN BOOLEAN
+DETERMINISTIC;
+
 END number_utl;
 /

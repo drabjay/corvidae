@@ -89,5 +89,24 @@ BEGIN
   RETURN l_varchar2;
 END to_char;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_number
+  (p_boolean                      IN     BOOLEAN)
+RETURN NUMBER
+DETERMINISTIC
+IS
+  l_number                       NUMBER;
+BEGIN
+  IF p_boolean THEN
+    l_number := true_number;
+  ELSIF NOT p_boolean THEN
+    l_number := false_number;
+  ELSE
+    l_number := null_number;
+  END IF;
+  RETURN l_number;
+END to_number;
+
 END boolean_utl;
 /

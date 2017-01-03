@@ -52,4 +52,19 @@ describe 'boolean_api' do
       it { is_expected.to eq null_varchar2 }
     end
   end
+
+  describe '.to_number' do
+    context 'when passed true' do
+      subject { plsql.boolean_api.to_number(true) }
+      it { is_expected.to eq true_number }
+    end
+    context 'when passed false' do
+      subject { plsql.boolean_api.to_number(false) }
+      it { is_expected.to eq false_number }
+    end
+    context 'when passed null' do
+      subject { plsql.boolean_api.to_number(NULL) }
+      it { is_expected.to eq null_number }
+    end
+  end
 end

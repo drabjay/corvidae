@@ -41,5 +41,12 @@ FUNCTION to_char
 RETURN VARCHAR2
 DETERMINISTIC;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_number
+  (p_boolean                      IN     BOOLEAN)
+RETURN NUMBER
+DETERMINISTIC;
+
 END boolean_utl;
 /
