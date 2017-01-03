@@ -69,5 +69,23 @@ BEGIN
   RETURN l_boolean;
 END to_boolean;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_char
+  (p_number                       IN     NUMBER
+  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
+  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
+RETURN VARCHAR2
+IS
+  l_char                         varchar2_utl.t_maximum;
+BEGIN
+  IF p_nls_parameters IS NULL THEN
+    l_char := standard.to_char(p_number, p_format_model);
+  ELSE
+    l_char := standard.to_char(p_number, p_format_model, p_nls_parameters);
+  END IF;
+  RETURN l_char;
+END to_char;
+
 END number_utl;
 /

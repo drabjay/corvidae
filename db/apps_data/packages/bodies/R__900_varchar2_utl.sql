@@ -85,5 +85,23 @@ BEGIN
   RETURN l_date;
 END to_date;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_number
+  (p_varchar2                     IN     VARCHAR2
+  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
+  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
+RETURN NUMBER
+IS
+  l_number                       NUMBER;
+BEGIN
+  IF p_nls_parameters IS NULL THEN
+    l_number := standard.to_number(p_varchar2, p_format_model);
+  ELSE
+    l_number := standard.to_number(p_varchar2, p_format_model, p_nls_parameters);
+  END IF;
+  RETURN l_number;
+END to_number;
+
 END varchar2_utl;
 /

@@ -64,4 +64,9 @@ describe 'varchar2_api' do
     subject { plsql.varchar2_api.to_date('1001-02-03 04:05:06', 'YYYY-MM-DD HH24:MI:SS') }
     it { is_expected.to eq date}
   end
+
+  describe '.to_number' do
+    subject { plsql.varchar2_api.to_number('123,456.789', 'FM999,999.999') }
+    it { is_expected.to eq 123456.789}
+  end
 end

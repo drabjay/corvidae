@@ -58,4 +58,9 @@ describe 'number_api' do
       it { expect{ plsql.number_api.to_boolean(nsv) }.to raise_exception(/ORA-06502/) }
     end
   end
+
+  describe '.to_char' do
+    subject { plsql.number_api.to_char(123456.789, 'FM999,990.999') }
+    it { is_expected.to eq '123,456.789'}
+  end
 end
