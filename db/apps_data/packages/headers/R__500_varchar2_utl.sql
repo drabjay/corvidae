@@ -27,5 +27,12 @@ FUNCTION nvl
 RETURN VARCHAR2
 DETERMINISTIC;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_boolean
+  (p_varchar2                     IN     VARCHAR2)
+RETURN BOOLEAN
+DETERMINISTIC;
+
 END varchar2_utl;
 /

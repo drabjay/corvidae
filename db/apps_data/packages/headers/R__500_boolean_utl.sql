@@ -34,5 +34,12 @@ FUNCTION null_number
 RETURN NUMBER
 DETERMINISTIC;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_char
+  (p_boolean                      IN     BOOLEAN)
+RETURN VARCHAR2
+DETERMINISTIC;
+
 END boolean_utl;
 /

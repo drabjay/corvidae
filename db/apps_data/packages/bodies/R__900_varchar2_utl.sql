@@ -46,5 +46,26 @@ BEGIN
   RETURN l_varchar2;
 END nvl;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_boolean
+  (p_varchar2                     IN     VARCHAR2)
+RETURN BOOLEAN
+DETERMINISTIC
+IS
+  l_boolean                      BOOLEAN;
+BEGIN
+  IF p_varchar2 = boolean_utl.false_varchar2 THEN
+    l_boolean := FALSE;
+  ELSIF p_varchar2 = boolean_utl.null_varchar2 THEN
+    l_boolean := NULL;
+  ELSIF p_varchar2 = boolean_utl.true_varchar2 THEN
+    l_boolean := TRUE;
+  ELSE
+    RAISE value_error;
+  END IF;
+  RETURN l_boolean;
+END to_boolean;
+
 END varchar2_utl;
 /
