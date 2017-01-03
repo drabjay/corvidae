@@ -46,5 +46,23 @@ BEGIN
   RETURN l_date;
 END nvl;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_char
+  (p_date                         IN     DATE
+  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
+  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
+RETURN VARCHAR2
+IS
+  l_char                         varchar2_utl.t_maximum;
+BEGIN
+  IF p_nls_parameters IS NULL THEN
+    l_char := standard.to_char(p_date, p_format_model);
+  ELSE
+    l_char := standard.to_char(p_date, p_format_model, p_nls_parameters);
+  END IF;
+  RETURN l_char;
+END to_char;
+
 END date_utl;
 /

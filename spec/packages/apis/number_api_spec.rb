@@ -40,4 +40,27 @@ describe 'number_api' do
       it { is_expected.to be NULL }
     end
   end
+
+  describe '.to_boolean' do
+    context 'when passed true_number' do
+      subject { plsql.number_api.to_boolean(plsql.boolean_api.true_number) }
+      it { is_expected.to be true }
+    end
+    context 'when passed false_number' do
+      subject { plsql.number_api.to_boolean(plsql.boolean_api.false_number) }
+      it { is_expected.to be false }
+    end
+    context 'when passed null_number' do
+      subject { plsql.number_api.to_boolean(plsql.boolean_api.null_number) }
+      it { is_expected.to be NULL }
+    end
+    context 'when passed other value' do
+      it { expect{ plsql.number_api.to_boolean(nsv) }.to raise_exception(/ORA-06502/) }
+    end
+  end
+
+  describe '.to_char' do
+    subject { plsql.number_api.to_char(123456.789, 'FM999,990.999') }
+    it { is_expected.to eq '123,456.789'}
+  end
 end
