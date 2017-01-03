@@ -34,5 +34,13 @@ FUNCTION to_boolean
 RETURN BOOLEAN
 DETERMINISTIC;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_date
+  (p_varchar2                     IN     VARCHAR2
+  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
+  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
+RETURN DATE;
+
 END varchar2_utl;
 /

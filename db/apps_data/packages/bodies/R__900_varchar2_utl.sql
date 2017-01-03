@@ -67,5 +67,23 @@ BEGIN
   RETURN l_boolean;
 END to_boolean;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_date
+  (p_varchar2                     IN     VARCHAR2
+  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
+  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
+RETURN DATE
+IS
+  l_date                         DATE;
+BEGIN
+  IF p_nls_parameters IS NULL THEN
+    l_date := standard.to_date(p_varchar2, p_format_model);
+  ELSE
+    l_date := standard.to_date(p_varchar2, p_format_model, p_nls_parameters);
+  END IF;
+  RETURN l_date;
+END to_date;
+
 END varchar2_utl;
 /

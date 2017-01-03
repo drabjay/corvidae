@@ -58,4 +58,10 @@ describe 'varchar2_api' do
       it { expect{ plsql.varchar2_api.to_boolean(nsv) }.to raise_exception(/ORA-06502/) }
     end
   end
+
+  describe '.to_date' do
+    let(:date) { Time.new(1001, 2, 3, 4, 5, 6) }
+    subject { plsql.varchar2_api.to_date('1001-02-03 04:05:06', 'YYYY-MM-DD HH24:MI:SS') }
+    it { is_expected.to eq date}
+  end
 end
