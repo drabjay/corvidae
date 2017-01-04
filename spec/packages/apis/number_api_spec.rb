@@ -63,4 +63,9 @@ describe 'number_api' do
     subject { plsql.number_api.to_char(123456.789, 'FM999,990.999') }
     it { is_expected.to eq '123,456.789'}
   end
+
+  describe '.to_canonical' do
+    subject { plsql.number_api.to_canonical(123456.789) }
+    it { is_expected.to eq '123456.789'}
+  end
 end

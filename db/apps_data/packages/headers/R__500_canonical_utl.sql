@@ -1,48 +1,36 @@
-CREATE OR REPLACE PACKAGE number_utl
+CREATE OR REPLACE PACKAGE canonical_utl
 AS
 
 /******************************************************************************\
 \******************************************************************************/
-FUNCTION nsv
-RETURN NUMBER
-DETERMINISTIC;
+  gt_format_model                VARCHAR2(65);
+  SUBTYPE t_format_model IS gt_format_model%TYPE;
 
 /******************************************************************************\
 \******************************************************************************/
-FUNCTION is_nsv
-  (p_number                       IN     NUMBER)
-RETURN BOOLEAN
-DETERMINISTIC;
-
-/******************************************************************************\
-\******************************************************************************/
-FUNCTION nvl
-  (p_number_1                     IN     NUMBER
-  ,p_number_2                     IN     NUMBER)
-RETURN NUMBER
-DETERMINISTIC;
-
-/******************************************************************************\
-\******************************************************************************/
-FUNCTION to_boolean
-  (p_number                       IN     NUMBER)
-RETURN BOOLEAN
-DETERMINISTIC;
-
-/******************************************************************************\
-\******************************************************************************/
-FUNCTION to_char
-  (p_number                       IN     NUMBER
-  ,p_format_model                 IN     VARCHAR2 DEFAULT NULL
-  ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
-RETURN VARCHAR2;
-
-/******************************************************************************\
-\******************************************************************************/
-FUNCTION to_canonical
-  (p_number                       IN     NUMBER)
+FUNCTION date_format_model
 RETURN VARCHAR2
 DETERMINISTIC;
 
-END number_utl;
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_date
+  (p_canonical                    IN     VARCHAR2)
+RETURN DATE
+DETERMINISTIC;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION number_format_model
+RETURN VARCHAR2
+DETERMINISTIC;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_number
+  (p_canonical                    IN     VARCHAR2)
+RETURN NUMBER
+DETERMINISTIC;
+
+END canonical_utl;
 /
