@@ -37,5 +37,12 @@ FUNCTION to_char
   ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
 RETURN VARCHAR2;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_canonical
+  (p_number                       IN     NUMBER)
+RETURN VARCHAR2
+DETERMINISTIC;
+
 END number_utl;
 /

@@ -64,5 +64,16 @@ BEGIN
   RETURN l_char;
 END to_char;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_canonical
+  (p_date                         IN     DATE)
+RETURN VARCHAR2
+DETERMINISTIC
+IS
+BEGIN
+  RETURN standard.to_char(p_date, canonical_utl.date_format_model);
+END to_canonical;
+
 END date_utl;
 /

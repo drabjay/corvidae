@@ -30,5 +30,12 @@ FUNCTION to_char
   ,p_nls_parameters               IN     VARCHAR2 DEFAULT NULL)
 RETURN VARCHAR2;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_canonical
+  (p_date                         IN     DATE)
+RETURN VARCHAR2
+DETERMINISTIC;
+
 END date_utl;
 /

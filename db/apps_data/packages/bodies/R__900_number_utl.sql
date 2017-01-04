@@ -87,5 +87,16 @@ BEGIN
   RETURN l_char;
 END to_char;
 
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION to_canonical
+  (p_number                       IN     NUMBER)
+RETURN VARCHAR2
+DETERMINISTIC
+IS
+BEGIN
+  RETURN standard.to_char(p_number, canonical_utl.number_format_model);
+END to_canonical;
+
 END number_utl;
 /
