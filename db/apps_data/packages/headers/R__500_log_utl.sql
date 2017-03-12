@@ -54,5 +54,39 @@ RETURN BOOLEAN;
 FUNCTION is_all
 RETURN BOOLEAN;
 
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_alert
+  (p_logging                      IN     BOOLEAN);
+
+PROCEDURE set_to_dbtable
+  (p_logging                      IN     BOOLEAN);
+
+PROCEDURE set_to_screen
+  (p_logging                      IN     BOOLEAN);
+
+PROCEDURE set_to_trace
+  (p_logging                      IN     BOOLEAN);
+
+PROCEDURE set_to_vsession
+  (p_logging                      IN     BOOLEAN);
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_alert
+RETURN BOOLEAN;
+
+FUNCTION is_to_dbtable
+RETURN BOOLEAN;
+
+FUNCTION is_to_screen
+RETURN BOOLEAN;
+
+FUNCTION is_to_trace
+RETURN BOOLEAN;
+
+FUNCTION is_to_vsession
+RETURN BOOLEAN;
+
 END log_utl;
 /

@@ -13,6 +13,12 @@ AS
 
   g_level                        NUMBER := c_loff;
 
+  g_to_alert                     BOOLEAN := FALSE;
+  g_to_dbtable                   BOOLEAN := TRUE;
+  g_to_screen                    BOOLEAN := FALSE;
+  g_to_trace                     BOOLEAN := FALSE;
+  g_to_vsession                  BOOLEAN := FALSE;
+
 /******************************************************************************\
 \******************************************************************************/
 FUNCTION loff
@@ -149,6 +155,106 @@ IS
 BEGIN
   RETURN level >= lall;
 END is_all;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_alert
+  (p_logging                      IN     BOOLEAN)
+IS
+BEGIN
+  IF (p_logging IS NOT NULL) THEN
+    g_to_alert := p_logging;
+  END IF;
+END set_to_alert;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_dbtable
+  (p_logging                      IN     BOOLEAN)
+IS
+BEGIN
+  IF (p_logging IS NOT NULL) THEN
+    g_to_dbtable := p_logging;
+  END IF;
+END set_to_dbtable;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_screen
+  (p_logging                      IN     BOOLEAN)
+IS
+BEGIN
+  IF (p_logging IS NOT NULL) THEN
+    g_to_screen := p_logging;
+  END IF;
+END set_to_screen;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_trace
+  (p_logging                      IN     BOOLEAN)
+IS
+BEGIN
+  IF (p_logging IS NOT NULL) THEN
+    g_to_trace := p_logging;
+  END IF;
+END set_to_trace;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE set_to_vsession
+  (p_logging                      IN     BOOLEAN)
+IS
+BEGIN
+  IF (p_logging IS NOT NULL) THEN
+    g_to_vsession := p_logging;
+  END IF;
+END set_to_vsession;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_alert
+RETURN BOOLEAN
+IS
+BEGIN
+  RETURN g_to_alert;
+END is_to_alert;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_dbtable
+RETURN BOOLEAN
+IS
+BEGIN
+  RETURN g_to_dbtable;
+END is_to_dbtable;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_screen
+RETURN BOOLEAN
+IS
+BEGIN
+  RETURN g_to_screen;
+END is_to_screen;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_trace
+RETURN BOOLEAN
+IS
+BEGIN
+  RETURN g_to_trace;
+END is_to_trace;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION is_to_vsession
+RETURN BOOLEAN
+IS
+BEGIN
+  RETURN g_to_vsession;
+END is_to_vsession;
 
 END log_utl;
 /

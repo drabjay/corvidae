@@ -151,4 +151,79 @@ describe 'log_api' do
       it { is_expected.to be true }
     end
   end
+
+  describe '.is_to_alert' do
+    subject { plsql.log_api.is_to_alert }
+    context 'when set to allowed value' do
+      before { plsql.log_api.set_to_alert(false) }
+      it { is_expected.to be false }
+    end
+    context 'when set to disallowed value' do
+      before do
+        plsql.log_api.set_to_alert(false)
+        plsql.log_api.set_to_alert(nil)
+      end
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '.is_to_dbtable' do
+    subject { plsql.log_api.is_to_dbtable }
+    context 'when set to allowed value' do
+      before { plsql.log_api.set_to_dbtable(false) }
+      it { is_expected.to be false }
+    end
+    context 'when set to disallowed value' do
+      before do
+        plsql.log_api.set_to_dbtable(false)
+        plsql.log_api.set_to_dbtable(nil)
+      end
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '.is_to_screen' do
+    subject { plsql.log_api.is_to_screen }
+    context 'when set to allowed value' do
+      before { plsql.log_api.set_to_screen(false) }
+      it { is_expected.to be false }
+    end
+    context 'when set to disallowed value' do
+      before do
+        plsql.log_api.set_to_screen(false)
+        plsql.log_api.set_to_screen(nil)
+      end
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '.is_to_trace' do
+    subject { plsql.log_api.is_to_trace }
+    context 'when set to allowed value' do
+      before { plsql.log_api.set_to_trace(false) }
+      it { is_expected.to be false }
+    end
+    context 'when set to disallowed value' do
+      before do
+        plsql.log_api.set_to_trace(false)
+        plsql.log_api.set_to_trace(nil)
+      end
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '.is_to_vsession' do
+    subject { plsql.log_api.is_to_vsession }
+    context 'when set to allowed value' do
+      before { plsql.log_api.set_to_vsession(false) }
+      it { is_expected.to be false }
+    end
+    context 'when set to disallowed value' do
+      before do
+        plsql.log_api.set_to_vsession(false)
+        plsql.log_api.set_to_vsession(nil)
+      end
+      it { is_expected.to eq false }
+    end
+  end
 end
