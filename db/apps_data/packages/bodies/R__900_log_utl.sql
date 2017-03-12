@@ -19,6 +19,8 @@ AS
   g_to_trace                     BOOLEAN := FALSE;
   g_to_vsession                  BOOLEAN := FALSE;
 
+  g_format_model                 varchar2_utl.t_maximum := 'YYYY-MM-DD:HH24:MI:SS';
+
 /******************************************************************************\
 \******************************************************************************/
 FUNCTION loff
@@ -162,7 +164,7 @@ PROCEDURE set_to_alert
   (p_logging                      IN     BOOLEAN)
 IS
 BEGIN
-  IF (p_logging IS NOT NULL) THEN
+  IF p_logging IS NOT NULL THEN
     g_to_alert := p_logging;
   END IF;
 END set_to_alert;
@@ -173,7 +175,7 @@ PROCEDURE set_to_dbtable
   (p_logging                      IN     BOOLEAN)
 IS
 BEGIN
-  IF (p_logging IS NOT NULL) THEN
+  IF p_logging IS NOT NULL THEN
     g_to_dbtable := p_logging;
   END IF;
 END set_to_dbtable;
@@ -184,7 +186,7 @@ PROCEDURE set_to_screen
   (p_logging                      IN     BOOLEAN)
 IS
 BEGIN
-  IF (p_logging IS NOT NULL) THEN
+  IF p_logging IS NOT NULL THEN
     g_to_screen := p_logging;
   END IF;
 END set_to_screen;
@@ -195,7 +197,7 @@ PROCEDURE set_to_trace
   (p_logging                      IN     BOOLEAN)
 IS
 BEGIN
-  IF (p_logging IS NOT NULL) THEN
+  IF p_logging IS NOT NULL THEN
     g_to_trace := p_logging;
   END IF;
 END set_to_trace;
@@ -206,7 +208,7 @@ PROCEDURE set_to_vsession
   (p_logging                      IN     BOOLEAN)
 IS
 BEGIN
-  IF (p_logging IS NOT NULL) THEN
+  IF p_logging IS NOT NULL THEN
     g_to_vsession := p_logging;
   END IF;
 END set_to_vsession;
@@ -255,6 +257,120 @@ IS
 BEGIN
   RETURN g_to_vsession;
 END is_to_vsession;
+
+/******************************************************************************\
+\******************************************************************************/
+FUNCTION formatted_varchar2
+  (p_level                        IN     NUMBER
+  ,p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+RETURN VARCHAR2
+IS
+  l_varchar2                     varchar2_utl.t_maximum;
+BEGIN
+  l_varchar2 := l_varchar2 || '[' || date_utl.to_char(sysdate, g_format_model) || ']';
+  l_varchar2 := l_varchar2 || '[' || user || ']';
+  l_varchar2 := l_varchar2 || '[' || number_utl.to_char(p_level, '00') || ']';
+  -- l_varchar2 := l_varchar2 || '[' || module_utl.present || ':' || module_utl.section || ']';
+  l_varchar2 := l_varchar2 || '[' || p_varchar2 || ']';
+  RETURN l_varchar2;
+END formatted_varchar2;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_line
+  (p_level                        IN     NUMBER
+  ,p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+  l_varchar2                     varchar2_utl.t_maximum;
+BEGIN
+  IF is_to_alert OR is_to_trace OR is_to_screen THEN
+    l_varchar2 := formatted_varchar2(p_level, p_varchar2);
+    IF is_to_alert THEN
+      dbms_system.ksdwrt(2, l_varchar2);
+    END IF;
+    IF is_to_trace THEN
+      dbms_system.ksdwrt(1, l_varchar2);
+    END IF;
+    IF is_to_screen THEN
+      screen_writer_utl.write_line(l_varchar2);
+    END IF;
+  END IF;
+  IF is_to_dbtable THEN
+    log_thi.create_entry
+      (p_log_level                    => p_level
+      ,p_log_text                     => p_varchar2);
+--      ,p_module_name                  => module_utl.present
+--      ,p_section_number               => module_utl.section
+--      ,p_variables                    => module_utl.variables);
+  END IF;
+  IF is_to_vsession THEN
+    dbms_application_info.set_client_info(p_varchar2);
+  END IF;
+END write_line;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_line
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  write_line(loff, p_varchar2);
+END write_line;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_fatal
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  IF is_fatal THEN
+    write_line(lfatal, p_varchar2);
+  END IF;
+END write_fatal;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_error
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  IF is_error THEN
+    write_line(lerror, p_varchar2);
+  END IF;
+END write_error;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_warning
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  IF is_warning THEN
+    write_line(lwarning, p_varchar2);
+  END IF;
+END write_warning;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_info
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  IF is_info THEN
+    write_line(linfo, p_varchar2);
+  END IF;
+END write_info;
+
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_debug
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL)
+IS
+BEGIN
+  IF is_debug THEN
+    write_line(ldebug, p_varchar2);
+  END IF;
+END write_debug;
 
 END log_utl;
 /

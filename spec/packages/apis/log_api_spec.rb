@@ -1,5 +1,12 @@
 require 'spec_helper'
 
+shared_context 'log_to_dbtable' do
+  before do
+    plsql.log_api.set_to_dbtable(true)
+    plsql.log_api.set_level(lall)
+  end
+end
+
 describe 'log_api' do
   let(:loff)        { 0 }
   let(:lfatal)      { 10 }
@@ -224,6 +231,78 @@ describe 'log_api' do
         plsql.log_api.set_to_vsession(nil)
       end
       it { is_expected.to eq false }
+    end
+  end
+
+  describe '.write_line' do
+    let(:line) { 'write_line '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_line(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
+    end
+  end
+
+  describe '.write_fatal' do
+    let(:line) { 'write_fatal '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_fatal(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
+    end
+  end
+
+  describe '.write_error' do
+    let(:line) { 'write_error '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_error(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
+    end
+  end
+
+  describe '.write_warning' do
+    let(:line) { 'write_warning '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_warning(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
+    end
+  end
+
+  describe '.write_info' do
+    let(:line) { 'write_info '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_info(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
+    end
+  end
+
+  describe '.write_debug' do
+    let(:line) { 'write_debug '.concat Time.now.strftime("%d/%m/%Y %H:%M") }
+    context 'when writing to dbtable' do
+      include_context 'log_to_dbtable'
+      it 'writes a log to the dbtable' do
+        count = plsql.logs.count(log_text: line)
+        plsql.log_api.write_debug(line)
+        expect(plsql.logs.count(log_text: line)).to eq count + 1
+      end
     end
   end
 end

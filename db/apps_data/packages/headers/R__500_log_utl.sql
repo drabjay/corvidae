@@ -88,5 +88,25 @@ RETURN BOOLEAN;
 FUNCTION is_to_vsession
 RETURN BOOLEAN;
 
+/******************************************************************************\
+\******************************************************************************/
+PROCEDURE write_line
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
+PROCEDURE write_fatal
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
+PROCEDURE write_error
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
+PROCEDURE write_warning
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
+PROCEDURE write_info
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
+PROCEDURE write_debug
+  (p_varchar2                     IN     VARCHAR2 DEFAULT NULL);
+
 END log_utl;
 /
