@@ -1,0 +1,2 @@
+GRANT EXECUTE ON variables_tbl TO apps_ui
+WITH GRANT OPTION;

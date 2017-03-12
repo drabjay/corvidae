@@ -1,0 +1,2 @@
+GRANT SELECT ON logs TO apps_api
+WITH GRANT OPTION;
