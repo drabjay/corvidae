@@ -1,0 +1,3 @@
+ALTER TABLE logs
+ADD CONSTRAINT log_chr1001
+CHECK (log_id > 0);

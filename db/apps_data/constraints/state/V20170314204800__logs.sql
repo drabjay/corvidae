@@ -1,0 +1,6 @@
+CREATE OR REPLACE TRIGGER logs_tx
+BEFORE UPDATE ON logs
+BEGIN
+  exception_utl.evoke('LOG_UPDATE_NOT_ALLOWED');
+END;
+/
