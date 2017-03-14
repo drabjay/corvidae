@@ -1,0 +1,2 @@
+GRANT EXECUTE ON exception_api TO apps_ui
+WITH GRANT OPTION;

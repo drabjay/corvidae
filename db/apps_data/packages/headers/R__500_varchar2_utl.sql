@@ -3,8 +3,16 @@ AS
 
 /******************************************************************************\
 \******************************************************************************/
-  gt_maximum                     VARCHAR2(32767);
+  gt_database_object            VARCHAR2(30);
+  gt_maximum                    VARCHAR2(32767);
+  gt_plsql_module               VARCHAR2(61); -- Allows for '<PACKAGE>.<MODULE>' value
+  gt_plsql_object               VARCHAR2(30);
+  gt_single_character           VARCHAR2(1);
+  SUBTYPE t_database_object IS gt_database_object%TYPE;
   SUBTYPE t_maximum IS gt_maximum%TYPE;
+  SUBTYPE t_plsql_module IS gt_plsql_module%TYPE;
+  SUBTYPE t_plsql_object IS gt_plsql_object%TYPE;
+  SUBTYPE t_single_character IS gt_single_character%TYPE;
 
 /******************************************************************************\
 \******************************************************************************/
